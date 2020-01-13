@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitHubProxy", "GitHubProxy\GitHubProxy.csproj", "{9B58CD61-503D-494D-BC47-320690F85499}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions Workflows", "Actions Workflows", "{B1A15E24-0CAA-4B3C-945C-3054ED4F1A25}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main.yml = .github\workflows\main.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{05DC4608-28AF-4028-9C2D-8C705EFC0DA2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GitHubProxy\config.example.toml = GitHubProxy\config.example.toml
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B58CD61-503D-494D-BC47-320690F85499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B58CD61-503D-494D-BC47-320690F85499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B58CD61-503D-494D-BC47-320690F85499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B58CD61-503D-494D-BC47-320690F85499}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9ABB630E-A078-407B-BD12-CBA57375212A}
+	EndGlobalSection
+EndGlobal

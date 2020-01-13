@@ -1,0 +1,21 @@
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.100'
+      - uses: actions/cache@v1
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - run: dotnet restore
+        working-directory: ./GitHubProxy
+      - run: mv config.example.toml config.toml
+        working-directory: ./GitHubProxy
+      - run: dotnet build
+        working-directory: ./GitHubProxy

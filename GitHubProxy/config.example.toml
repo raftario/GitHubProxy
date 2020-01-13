@@ -1,0 +1,18 @@
+﻿Token = "a1b2c3d4"
+Interval = 30
+
+[DefaultAuthor]
+Name = "John Doe"
+Email = "john.doe@example.com"
+
+[Source]
+User = "raftario"
+Repo = "GitHubProxy"
+Branches = [
+	"master",
+]
+
+[Destination]
+User = "octocat"
+Repo = "Hello-World"
+Anonymize = true
