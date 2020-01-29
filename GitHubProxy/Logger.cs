@@ -16,13 +16,15 @@ namespace GitHubProxy
         {
             var color = Console.ForegroundColor;
             Console.Write($"[{DateTime.Now:T} - ");
+#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
             Console.ForegroundColor = level switch
             {
                 LogLevel.Debug => ConsoleColor.Gray,
                 LogLevel.Info => ConsoleColor.Cyan,
                 LogLevel.Warning => ConsoleColor.Yellow,
-                LogLevel.Error => ConsoleColor.Red,
+                LogLevel.Error => ConsoleColor.Red
             };
+#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
             Console.Write(level);
             Console.ForegroundColor = color;
             Console.Write("] ");
@@ -42,8 +44,19 @@ namespace GitHubProxy
 #endif
         }
 
-        public static void Info(object value, bool nl = true) => Log(value, LogLevel.Info, nl);
-        public static void Warning(object value, bool nl = true) => Log(value, LogLevel.Warning, nl);
-        public static void Error(object value, bool nl = true) => Log(value, LogLevel.Error, nl);
+        public static void Info(object value, bool nl = true)
+        {
+            Log(value, LogLevel.Info, nl);
+        }
+
+        public static void Warning(object value, bool nl = true)
+        {
+            Log(value, LogLevel.Warning, nl);
+        }
+
+        public static void Error(object value, bool nl = true)
+        {
+            Log(value, LogLevel.Error, nl);
+        }
     }
 }

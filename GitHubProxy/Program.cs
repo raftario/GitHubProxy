@@ -16,6 +16,15 @@ namespace GitHubProxy
 {
     internal sealed class Program
     {
+        private ProxyConfig _config;
+
+        private Signature _defaultSignature;
+
+        private GitHubClient _ghClient;
+        private GitHubRepository _ghDest;
+        private GitHubRepository _ghSrc;
+        private User _ghUser;
+
         internal static void Main()
         {
             try
@@ -27,15 +36,6 @@ namespace GitHubProxy
                 Logger.Error(ex.ToString());
             }
         }
-
-        private ProxyConfig _config;
-
-        private GitHubClient _ghClient;
-        private User _ghUser;
-        private GitHubRepository _ghSrc;
-        private GitHubRepository _ghDest;
-
-        private Signature _defaultSignature;
 
         private async Task AsyncMain()
         {
@@ -72,14 +72,21 @@ namespace GitHubProxy
             {
                 Console.WriteLine();
                 Logger.Info("Proxying...");
+
                 await ProxyCommits();
+                _ghSrc = await _ghClient.Repository.Get(_config.Source.User, _config.Source.Repo);
+                _ghDest = await _ghClient.Repository.Get(_config.Destination.User, _config.Destination.Repo);
+                await ProxyReleases();
+
                 Logger.Info("Done.");
                 await Task.Delay(_config.Interval * 60 * 1000);
             }
         }
 
-        private GitCredentials GitCredentials(string url, string user, SupportedCredentialTypes cred) =>
-            new UsernamePasswordCredentials {Username = _ghUser.Login, Password = _config.Token};
+        private GitCredentials GitCredentials(string url, string user, SupportedCredentialTypes cred)
+        {
+            return new UsernamePasswordCredentials {Username = _ghUser.Login, Password = _config.Token};
+        }
 
         private async Task SetupSrcRepo()
         {
@@ -118,6 +125,11 @@ namespace GitHubProxy
             {
                 await PushDestRepo(branch);
             }
+        }
+
+        private async Task ProxyReleases()
+        {
+            var srcReleases = await _ghClient.Repository.Release.GetAll(_config.Source.User, _config.Source.Repo);
         }
 
         private async Task PullSrcRepo(string branch)

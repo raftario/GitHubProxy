@@ -23,15 +23,15 @@
 
     public class SourceProxyRepo : IProxyRepo
     {
+        public string[] Branches { get; set; }
         public string User { get; set; }
         public string Repo { get; set; }
-        public string[] Branches { get; set; }
     }
 
     public class DestProxyRepo : IProxyRepo
     {
+        public bool Anonymize { get; set; }
         public string User { get; set; }
         public string Repo { get; set; }
-        public bool Anonymize { get; set; }
     }
 }
