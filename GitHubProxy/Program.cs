@@ -83,10 +83,8 @@ namespace GitHubProxy
             }
         }
 
-        private GitCredentials GitCredentials(string url, string user, SupportedCredentialTypes cred)
-        {
-            return new UsernamePasswordCredentials {Username = _ghUser.Login, Password = _config.Token};
-        }
+        private GitCredentials GitCredentials(string url, string user, SupportedCredentialTypes cred) =>
+            new UsernamePasswordCredentials {Username = _ghUser.Login, Password = _config.Token};
 
         private async Task SetupSrcRepo()
         {
