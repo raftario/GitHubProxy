@@ -143,7 +143,15 @@ namespace GitHubProxy
             await Task.Run(() =>
             {
                 using var repo = new GitRepository("srcRepo");
-                Commands.Checkout(repo, branch);
+
+                if (repo.Branches[branch] == null)
+                {
+                    var remoteBranch = repo.Branches[$"origin/{branch}"];
+                    var newBranch = repo.CreateBranch(branch, remoteBranch.Tip);
+                    repo.Branches.Update(newBranch, b => b.TrackedBranch = remoteBranch.CanonicalName);
+                }
+
+                Commands.Checkout(repo, repo.Branches[branch]);
                 Commands.Pull(repo, _defaultSignature, options);
             });
         }
