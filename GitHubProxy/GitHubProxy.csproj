@@ -13,11 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ConfigFile Include="config.toml" />
+    <None Update="config.toml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-
-  <Target Name="CopyConfig" AfterTargets="AfterBuild">
-    <Copy SourceFiles="@(ConfigFile)" DestinationFolder="$(OutDir)" />
-  </Target>
 
 </Project>
